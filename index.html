@@ -1,0 +1,60 @@
+<!-- Made by Janne Immonen
+I have used internet sources as help in looking 
+for javascript functions that could work well in TODO apps. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <title>TODO List</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <!-- The app is inside the Section tags -->
+    <section>
+      <div id="assingment">
+        <input type="text" placeholder="Write a new task" />
+        <button id="send">Add Button</button>
+      </div>
+      <div id="duties"></div>
+    </section>
+    <!-- The JavaScript code is inside the Script tags -->
+    <script type="text/javascript">
+      /* This section checks whether the user has written a task in the text,
+       if not, then an alert message will appear */
+      document.querySelector("#send").onclick = function () {
+        if (document.querySelector("#assingment input").value.length == 0) {
+          alert("Please Enter a Task");
+        } else {
+          document.querySelector(
+            "#duties"
+          ).innerHTML += `<div class="duty"><span id="dutyname">${
+            document.querySelector("#assingment input").value
+          }</span><button class="delete">Delete</button></div>`;
+          // With the Delete button you can delete the task you have done
+          let current_duties = document.querySelectorAll(".delete");
+
+          for (let i = 0; i < current_duties.length; i++) {
+            current_duties[i].onclick = function () {
+              this.parentNode.remove();
+            };
+          }
+          /* You can also cross out the completed task if you want to do the same next week,
+          for example */
+          let duties = document.querySelectorAll("#dutyname");
+
+          for (let i = 0; i < duties.length; i++) {
+            duties[i].onclick = function () {
+              this.classList.toggle("completed");
+            };
+          }
+          document.querySelector("#assingment input").value = "";
+        }
+      };
+    </script>
+  </body>
+</html>
